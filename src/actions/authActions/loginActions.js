@@ -91,7 +91,6 @@ export const loginResponse = urlString => {
 }
 
 export const personalNoLogin = (value, containerPage) => {
-  debugger
   return function(dispatch) {
     const request = {
       method: 'GET',

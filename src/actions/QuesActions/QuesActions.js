@@ -14,7 +14,6 @@ export const ADDFORM_QUES_SUCCESS = 'ADDFORM_QUES_success'
 export const ADDFORM_QUES_FAIL = 'ADDFORM_QUES_fail'
 
 export const createQues = requestJSON => {
-  debugger
   return function(dispatch) {
     const request = {
       method: 'POST',
@@ -43,7 +42,7 @@ export const createQues = requestJSON => {
       })
       .catch(error => {
         console.log(error)
-        debugger
+
         dispatch({
           type: CREATE_QUES_FAIL
         })
@@ -52,7 +51,6 @@ export const createQues = requestJSON => {
 }
 
 export const addForm = requestJSON => {
-  debugger
   return function(dispatch) {
     const request = {
       method: 'POST',

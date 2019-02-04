@@ -50,7 +50,7 @@ import Modal from 'react-native-modal'
 import { NetworkInfo } from 'react-native-network-info'
 import { NativeModules, AppState } from 'react-native'
 import QRCode from 'react-native-qrcode'
-import { LogoutModal,AboutModal } from '../../constants/Modal.js'
+import { LogoutModal, AboutModal } from '../../constants/Modal.js'
 import CalendarPicker from 'react-native-calendar-picker'
 import { DateSelection } from '../DateSelection/index'
 import countriesData from '../../constants/countries.json'
@@ -238,19 +238,16 @@ class PersonalDetail extends Component {
   }
   selectDate() {
     debugger
-    if(this.state.selectedStartDate=='YYYY/MM/DD')
-    {
+    if (this.state.selectedStartDate == 'YYYY/MM/DD') {
       this.dropdown.alertWithType(
         'success',
         strings.notification,
         strings.selectDate
       )
-    }
-    else{
-    var date = this.formatDate(this.state.selectedStartDate.toString())
+    } else {
+      var date = this.formatDate(this.state.selectedStartDate.toString())
 
-    this.setState({ calendarModel: false, selectedStartDate: date })
-    
+      this.setState({ calendarModel: false, selectedStartDate: date })
     }
   }
   _selectedItem(item) {
@@ -286,16 +283,31 @@ class PersonalDetail extends Component {
   }
 
   searchCountry(search) {
+    debugger
     if (search === '') {
-      this.setState({ data: countriesData })
+      this.setState({ data: countriesData.data })
+    } else {
+      let data = []
+      countriesData.data.map((item, index) => {
+        let strng = item.name.toLowerCase()
+        var countryString = false
+        for (i = 0; i < search.length; i++) {
+          var countryData = item.name.toLowerCase()
+          var enterData = search.toLowerCase()
+          if (countryData[i] == enterData[i]) {
+            countryString = true
+          } else {
+            countryString = false
+            break
+          }
+        }
+        // if (item.name.toLowerCase().search(search.toLowerCase()) != -1)
+        if (countryString) {
+          data.push(item)
+        }
+      })
+      this.setState({ data: data })
     }
-    let data = []
-    countriesData.data.map((item, index) => {
-      let strng = item.name.toLowerCase()
-      if (item.name.toLowerCase().search(search.toLowerCase()) != -1)
-        data.push(item)
-    })
-    this.setState({ data: data })
   }
   onAction = active => {
     if (active) {
@@ -441,7 +453,7 @@ class PersonalDetail extends Component {
    */
 
   nextQues() {
-    this.setState({selectedStartDate: 'YYYY/MM/DD'})
+    this.setState({ selectedStartDate: 'YYYY/MM/DD' })
     if (this.state.subQuesCheck) {
     } else {
       if (userQues.length > userQuesArrIndex) {
@@ -2413,34 +2425,34 @@ class PersonalDetail extends Component {
                           )}
                         </View>
                         <View style={globalStyle.optionsContainerView}>
-                        <View
-                        style={{
-                          flexDirection: 'row',
+                          <View
+                            style={{
+                              flexDirection: 'row',
 
-                          alignItems: 'center'
-                        }}>
-                        <View>
-                          <Image
-                            style={{
-                              marginRight: 15,
-                              width: WINDOW_WIDTH / 15,
-                              height: WINDOW_HEIGHT / 30
-                            }}
-                            source={item.flagImage}
-                          />
-                        </View>
-                        <View>
-                          <Text
-                            style={{
-                              margin: 10,
-                              fontWeight: 'bold',
-                              fontSize: 20,
-                              color: 'grey'
+                              alignItems: 'center'
                             }}>
-                            {item.languages[language]}
-                          </Text>
-                        </View>
-                      </View>
+                            <View>
+                              <Image
+                                style={{
+                                  marginRight: 15,
+                                  width: WINDOW_WIDTH / 20,
+                                  height: WINDOW_HEIGHT / 40
+                                }}
+                                source={item.flagImage}
+                              />
+                            </View>
+                            <View>
+                              <Text
+                                style={{
+                                  margin: 10,
+                                  fontWeight: 'bold',
+                                  fontSize: 20,
+                                  color: 'grey'
+                                }}>
+                                {item.languages[language]}
+                              </Text>
+                            </View>
+                          </View>
                         </View>
                       </TouchableOpacity>
                     )}
@@ -2473,7 +2485,7 @@ class PersonalDetail extends Component {
                 </View>
               </View>
             </Modal>
-            
+
             <View
               style={{
                 paddingTop: 25,
@@ -2483,40 +2495,40 @@ class PersonalDetail extends Component {
                 justifyContent: 'space-between',
                 width: WINDOW_WIDTH
               }}>
-              <View style={{flexDirection:'row'}}>
-             <View style={{flexDirection:'row',alignItems:'center' }}>
-              <AboutModal/>
-              </View>
-              <TouchableOpacity
-                style={{
-                  marginLeft: 10,
-                  flexDirection: 'row',
-                  borderBottomColor: 'grey',
-              //    borderBottomWidth: 1,
-                  alignItems: 'center'
-                }}
-                onPress={() => this.hideShowModel()}>
-                 <View>
-                  <Image
-                    style={{
-                      marginRight: 5,
-                      width: WINDOW_WIDTH / 15,
-                      height: WINDOW_HEIGHT / 30
-                    }}
-                    source={flag}
-                  />
+              <View style={{ flexDirection: 'row' }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <AboutModal />
                 </View>
-                {/* <Text style={{ color: 'grey', fontWeight: 'bold' }}>
+                <TouchableOpacity
+                  style={{
+                    marginLeft: 10,
+                    flexDirection: 'row',
+                    borderBottomColor: 'grey',
+                    //    borderBottomWidth: 1,
+                    alignItems: 'center'
+                  }}
+                  onPress={() => this.hideShowModel()}>
+                  <View>
+                    <Image
+                      style={{
+                        marginRight: 5,
+                        width: WINDOW_WIDTH / 20,
+                        height: WINDOW_HEIGHT / 40
+                      }}
+                      source={flag}
+                    />
+                  </View>
+                  {/* <Text style={{ color: 'grey', fontWeight: 'bold' }}>
                   {languageName}
                 </Text> */}
-                <Icon
-                  name="ios-arrow-down"
-                  size={20}
-                  color="grey"
-                  style={{ marginLeft: 5, marginTop: 4 }}
-                />
-              </TouchableOpacity>
-</View>
+                  <Icon
+                    name="ios-arrow-down"
+                    size={20}
+                    color="grey"
+                    style={{ marginLeft: 5, marginTop: 4 }}
+                  />
+                </TouchableOpacity>
+              </View>
               <View style={{ flexDirection: 'column', alignItems: 'center' }}>
                 <Text
                   style={{ color: 'grey', fontSize: 20, fontWeight: 'bold' }}>
@@ -2541,7 +2553,14 @@ class PersonalDetail extends Component {
                       color="grey"
                       style={{ marginTop: 4 }}
                     />
-                    <Text style={{ padding: 10,color:'grey',fontWeight:'bold' }}>{strings.settings}</Text>
+                    <Text
+                      style={{
+                        padding: 10,
+                        color: 'grey',
+                        fontWeight: 'bold'
+                      }}>
+                      {strings.settings}
+                    </Text>
                   </View>
                 </TouchableOpacity>
                 <LogoutModal />

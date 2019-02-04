@@ -101,7 +101,7 @@ export default class Auth extends Component {
   componentDidMount() {
     NativeModules.BatteryStatus.test(info => {
       // 0 unknown, 1 unplegged, 2 charging, 3 full
-      debugger
+
       const level = Math.ceil(info.state)
       if (level == 1) {
         NativeModules.BatteryStatus.updateBatteryLevel(info => {
@@ -215,8 +215,8 @@ export default class Auth extends Component {
                           <Image
                             style={{
                               marginRight: 15,
-                              width: WINDOW_WIDTH / 15,
-                              height: WINDOW_HEIGHT / 30
+                              width: WINDOW_WIDTH / 20,
+                              height: WINDOW_HEIGHT / 40
                             }}
                             source={item.flagImage}
                           />
@@ -308,8 +308,8 @@ export default class Auth extends Component {
                   <Image
                     style={{
                       marginRight: 5,
-                      width: WINDOW_WIDTH / 15,
-                      height: WINDOW_HEIGHT / 30
+                      width: WINDOW_WIDTH / 20,
+                      height: WINDOW_HEIGHT / 40
                     }}
                     source={flag}
                   />

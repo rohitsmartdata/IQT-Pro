@@ -295,7 +295,7 @@ const SECTIONS = [
         _id: '12D94E24-6EC1-4454-94A0-53F8130742E2',
         title: {
           en: 'RVN Health Form',
-          sv: 'RVN Health Form'
+          sv: 'RVN hälsoformulär'
         }
       }
     ],
@@ -367,8 +367,6 @@ class HomeScreen extends Component {
   }
 
   startQuestionnaire(value) {
-    debugger
-
     if (value) {
       var valueArr = {
         title: value.title.en,
@@ -587,8 +585,8 @@ class HomeScreen extends Component {
                             <Image
                               style={{
                                 marginRight: 15,
-                                width: WINDOW_WIDTH / 15,
-                                height: WINDOW_HEIGHT / 30
+                                width: WINDOW_WIDTH / 20,
+                                height: WINDOW_HEIGHT / 40
                               }}
                               source={item.flagImage}
                             />
@@ -676,8 +674,8 @@ class HomeScreen extends Component {
                     <Image
                       style={{
                         marginRight: 5,
-                        width: WINDOW_WIDTH / 15,
-                        height: WINDOW_HEIGHT / 30
+                        width: WINDOW_WIDTH / 20,
+                        height: WINDOW_HEIGHT / 40
                       }}
                       source={flag}
                     />

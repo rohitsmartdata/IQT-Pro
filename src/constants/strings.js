@@ -97,7 +97,7 @@ export let strings = new LocalizedStrings({
     noInternet: 'Ingen internetanslutning',
     noInternetString: 'Vänligen kontrollera internetanslutningen',
     inputPlaceholder: 'Skriv ditt svar här',
-    about: 'handla om',
+    about: 'Om',
     lowBattery: 'Batteriet är lågt. Anslut till eluttaget.',
     selectDate: 'Vänligen välj datum'
   }
