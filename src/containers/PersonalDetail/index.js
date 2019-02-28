@@ -27,7 +27,6 @@ import {
 } from 'native-base'
 import UserInactivity from 'react-native-user-inactivity'
 import { globalStyle } from '../../constants/GlobalStyleSheet.js'
-// import { languageList } from '../../constants/language'
 import { CheckBox } from 'react-native-elements'
 import { Input } from 'native-base'
 import { Actions, ActionConst } from 'react-native-router-flux'
@@ -213,10 +212,12 @@ class PersonalDetail extends Component {
     this._renderItem = this._renderItem.bind(this)
     this.searchCountry = this.searchCountry.bind(this)
   }
-
+/**
+ * @onDateChange: This function performs actions on change in date from calendar.
+ * @param {represents the latest date we receive from calendar} date 
+ */
   onDateChange(date) {
-    //PersonalDetail.datePickerReponse(date)
-    // this.Auth.setState({ lol: 'asa' })
+    
     this.setState({
       selectedStartDate: date,
       severSelectedStartDate: date.toString()
@@ -225,6 +226,10 @@ class PersonalDetail extends Component {
     userQues[userQuesArrIndex - 1].status = date.toString()
     this.btnValidation()
   }
+  /**
+   * @formatDate: This function is used to format global date.
+   * @param {represents the global format of date  } date 
+   */
   formatDate(date) {
     var d = new Date(date),
       month = '' + (d.getMonth() + 1),
@@ -236,6 +241,11 @@ class PersonalDetail extends Component {
 
     return [year, month, day].join('-')
   }
+
+  /**
+   * 
+   * @selectDate: This function represents the action performed on click from calendar
+   */
   selectDate() {
     debugger
     if (this.state.selectedStartDate == 'YYYY/MM/DD') {
@@ -251,8 +261,6 @@ class PersonalDetail extends Component {
     }
   }
   _selectedItem(item) {
-    console.log(item)
-    // this.props.onItem(item)
     this.setState({ selected: item })
     showQues[0].status = item.name
     userQues[userQuesArrIndex - 1].status = item.name
@@ -311,7 +319,7 @@ class PersonalDetail extends Component {
   }
   onAction = active => {
     if (active) {
-      console.log(active)
+    
     } else {
       if (Actions.currentScene == 'PersonalDetail') {
         AsyncStorage.setItem('name', '')
@@ -335,38 +343,12 @@ class PersonalDetail extends Component {
   }
 
   bankIdAuth(token, orderRef) {
-    // NetworkInfo.getIPAddress(ip => {
-    //   console.log(ip)
-    // })
-
-    // // Get IPv4 IP
-    // NetworkInfo.getIPV4Address(ipv4 => {
-    //   console.log(ipv4)
-    // })
-
-    // // Get Broadcast
-    // NetworkInfo.getBroadcast(address => {
-    //   console.log(address)
-    // })
-
-    // // Get SSID
-    // NetworkInfo.getSSID(ssid => {
-    //   console.log(ssid)
-    // })1
-
-    // // Get BSSID
-    // NetworkInfo.getBSSID(ssid => {
-    //   console.log(ssid)
-    // })
-
+  
     let url2 =
       'https://app.bankid.com/?autostarttoken=' +
       token +
       '&redirect=iqform://?orderRef=' +
       orderRef
-
-    console.log(NativeModules, url2, 'NativeModulesNativeModules')
-
     var CalendarManager = NativeModules.CalendarManager
 
     CalendarManager.checkBankRoll(url2)
@@ -1431,10 +1413,8 @@ class PersonalDetail extends Component {
           if (nestedArrCheck[j] == userQues[i].outputId) {
             this.state.nestedArrCheckBool = true
             if (j < nestedArrCheck.length - 1) {
-              // nestedArrCheck.pop()
-
-              nestedArrCheck.splice(j + 1, nestedArrCheck.length - (j + 1))
-              console.log(nestedArrCheck)
+                        nestedArrCheck.splice(j + 1, nestedArrCheck.length - (j + 1))
+         
             } else {
             }
           } else {
@@ -1539,7 +1519,7 @@ class PersonalDetail extends Component {
       }
     }
 
-    console.log(outputArr)
+  
     var finalOutputArray = outputArr
 
     outputArr = {}
@@ -1668,15 +1648,12 @@ class PersonalDetail extends Component {
       this.setState({ againQuesCheck: value })
     )
     AsyncStorage.getItem('name').then(value => this.userDetails(value))
-    // Actions.refresh({ right: RightButton(Actions.LongAnswerType) })
-
-    // this.bankIdToken()
+   
   }
   userDetails(result) {
     this.setState({ userDetails: JSON.parse(result) })
     this.props.clearQuesData()
-    console.log(this.state.userDetails)
-    console.log(this.state.apiValue)
+ 
 
     if (this.state.againQuesCheck) {
       var requestJSON = {
@@ -1787,7 +1764,7 @@ class PersonalDetail extends Component {
     } else {
     }
     if (Props.saveQuesDetails) {
-      this.setState({
+             this.setState({
         createQuesId: Props.saveQuesDetails.id,
         quesId: Props.saveQuesDetails.form_id
       })
